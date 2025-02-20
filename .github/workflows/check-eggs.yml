@@ -32,4 +32,4 @@ jobs:
         EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
         NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
         ZIP_CODE: ${{ secrets.ZIP_CODE }}
-      run: node src/monitor.ts 
+      run: npx ts-node src/monitor.ts 
