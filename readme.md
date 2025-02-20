@@ -1,5 +1,7 @@
 # Amazon Whole Foods Organic Eggs Stock Checker 🥚
 
+**Disclaimer:** This is a personal project and is not affiliated with, endorsed by, or connected to my employer (AWS) or Amazon.com, Inc. in any way.
+
 An intelligent web scraper that monitors Whole Foods organic egg availability on Amazon and sends email notifications when stock is found. Built with enterprise-grade reliability, anti-bot detection, and proxy rotation.
 
 ## Features
