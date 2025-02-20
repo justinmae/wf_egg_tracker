@@ -256,28 +256,22 @@ async function testEmailNotification() {
 }
 
 async function main() {
-  logger.info('Starting stock monitor', {
-    checkIntervalMin: config.CHECK_INTERVAL_MIN
-  });
+  logger.info('Starting stock monitor');
   
-  while (true) {
-    try {
-      const { hasStock, availableProducts } = await checkStock();
-      if (hasStock) {
-        logger.info('Stock found!', { availableProducts });
-        await sendEmailNotification(availableProducts);
-        break;
-      }
-      logger.info('No stock found, waiting for next check', {
-        nextCheckInMinutes: config.CHECK_INTERVAL_MIN
-      });
-    } catch (error) {
-      logger.error('Error in main loop', error);
+  try {
+    const { hasStock, availableProducts } = await checkStock();
+    if (hasStock) {
+      logger.info('Stock found!', { availableProducts });
+      await sendEmailNotification(availableProducts);
+    } else {
+      logger.info('No stock found');
     }
-    await new Promise(resolve => 
-      setTimeout(resolve, config.CHECK_INTERVAL_MIN * 60 * 1000)
-    );
+  } catch (error) {
+    logger.error('Error in main loop', error);
+    process.exit(1); // Exit with error code
   }
+  
+  process.exit(0); // Exit successfully
 }
 
 // Add test command line argument check
