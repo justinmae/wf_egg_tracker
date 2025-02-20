@@ -195,9 +195,12 @@ async function checkStock() {
         const titleElement = await product.$('.a-text-normal');
         const title = await titleElement?.textContent() || 'Unknown Product';
         
-        if (!title.toLowerCase().includes('organic') || !title.toLowerCase().includes('eggs')) {
-          continue;
-        }
+          // Filter out products that do not contain 'organic' or 'eggs', or contain 'liquid'
+          if (!title.toLowerCase().includes('organic')
+              || !title.toLowerCase().includes('eggs')
+              || title.toLowerCase().includes('liquid')) {
+              continue;
+          }
         
         const outOfStock = await product.$('text=/currently unavailable|out of stock/i');
         const status = outOfStock ? 'OUT_OF_STOCK' : 'AVAILABLE';
